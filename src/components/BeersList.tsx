@@ -1,9 +1,8 @@
 import React from 'react';
-import './App.css';
-import { useAppSelector, useAppDispatch } from './redux/hooks'
-import { selectBeers, updateBeersList } from "./redux/beersSlice"
+import { useAppSelector, useAppDispatch } from '../redux/hooks'
+import { selectBeers, updateBeersList } from "../redux/beersSlice"
 
-function App() {
+function BeerList() {
     const dispatch = useAppDispatch()
 
     const onClickUpdateBeers = () => dispatch(updateBeersList(["ale", "pale", "dark"]))
@@ -19,4 +18,4 @@ function App() {
     );
 }
 
-export default App;
+export default BeerList;
