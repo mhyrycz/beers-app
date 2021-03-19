@@ -1,9 +1,9 @@
 
 import { FC } from "react"
-import { useAppSelector } from "../redux/hooks"
-import { selectBeersByPage } from "../redux/beersSlice"
-import useFetchBeers from "../fetch/useFetchBeers"
-import Pagination from "./Pagination"
+import { useAppSelector } from "../../redux/hooks"
+import { selectBeersByPage } from "../../redux/beersSlice"
+import useFetchBeers from "../../fetch/useFetchBeers"
+import Pagination from "../Pagination"
 
 const BeerList: FC = () => {
     const {

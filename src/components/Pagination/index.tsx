@@ -16,7 +16,8 @@ const Pagination: FC<PaginationProps> = (props: PaginationProps) => {
     const { currentPage, setPage } = props
     const slide = currentPage > 10 ? currentPage - 10 : 0
     const pages = Array.from({ length: 10 }, (_, i) => i + 1 + slide)
-    const isIncrementAllowed = !!useAppSelector(selectBeersByPage(currentPage - 1)).length
+    console.log(useAppSelector(selectBeersByPage(currentPage - 1)).length)
+    const isIncrementAllowed = useAppSelector(selectBeersByPage(currentPage - 1)).length === 3
 
     const decreasePage = () => {
         if (currentPage > 1) {
