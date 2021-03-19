@@ -1,7 +1,8 @@
-import { useParams } from "react-router-dom";
+import { FC } from "react"
+import { useParams } from "react-router-dom"
 
-const BeerDetails = () => {
-    const { id }: any = useParams();
+const BeerDetails: FC = () => {
+    const { id }: { id: string } = useParams()
     return (
         <div>
             Beer {id} Details

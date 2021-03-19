@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
-import { useAppSelector, useAppDispatch } from '../redux/hooks'
+import { useEffect, useState, FC } from "react"
+import { useAppSelector, useAppDispatch } from "../redux/hooks"
 import { selectBeers, updateBeersList } from "../redux/beersSlice"
 
-function BeerList() {
-    const [isLoaded, setIsLoaded] = useState(false);
-    const [error, setError] = useState(null);
+const BeerList: FC = () => {
+    const [isLoaded, setIsLoaded] = useState(false)
+    const [error, setError] = useState(null)
     const dispatch = useAppDispatch()
 
     useEffect(() => {
@@ -12,13 +12,13 @@ function BeerList() {
             .then(res => res.json())
             .then(
                 (result: any) => {
-                    setIsLoaded(true);
+                    setIsLoaded(true)
                     const beersNames = result.map((r: any) => r.name)
-                    dispatch(updateBeersList(beersNames));
+                    dispatch(updateBeersList(beersNames))
                 },
                 (error) => {
-                    setIsLoaded(true);
-                    setError(error);
+                    setIsLoaded(true)
+                    setError(error)
                 }
             )
     }, [dispatch])
@@ -32,7 +32,7 @@ function BeerList() {
                 {error}
             </header>
         </div>
-    );
+    )
 }
 
-export default BeerList;
+export default BeerList

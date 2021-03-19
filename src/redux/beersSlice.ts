@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { RootState } from './store'
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { RootState } from "./store"
 
 // Define a type for the slice state
 interface BeersState {
@@ -12,7 +12,7 @@ const initialState: BeersState = {
 }
 
 export const beersSlice = createSlice({
-    name: 'beers',
+    name: "beers",
     initialState,
     reducers: {
         updateBeersList: (state, action: PayloadAction<string[]>) => ({
@@ -24,6 +24,6 @@ export const beersSlice = createSlice({
 export const { updateBeersList } = beersSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
-export const selectBeers = (state: RootState) => state.beers.list
+export const selectBeers = (state: RootState): BeersState["list"] => state.beers.list
 
 export default beersSlice.reducer
