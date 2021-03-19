@@ -1,6 +1,8 @@
 import { FC } from "react"
 import { PaginationWrapper, Page, Arrow } from "./styles"
 import { PageProps } from "../../fetch/useFetchBeers"
+import { selectBeersByPage } from "../../redux/beersSlice"
+import { useAppSelector } from "../../redux/hooks"
 
 const RIGHT = String.fromCharCode(8680)
 const LEFT = String.fromCharCode(8678)
@@ -14,10 +16,26 @@ const Pagination: FC<PaginationProps> = (props: PaginationProps) => {
     const { currentPage, setPage } = props
     const slide = currentPage > 10 ? currentPage - 10 : 0
     const pages = Array.from({ length: 10 }, (_, i) => i + 1 + slide)
+    const isIncrementAllowed = !!useAppSelector(selectBeersByPage(currentPage - 1)).length
+
+    const decreasePage = () => {
+        if (currentPage > 1) {
+            setPage(currentPage - 1)
+        }
+    }
+
+    const increasePage = () => {
+        if (isIncrementAllowed) {
+            setPage(currentPage + 1)
+        }
+    }
 
     return (
         <PaginationWrapper>
-            <Arrow onClick={() => setPage(currentPage - 1)}>
+            <Arrow
+                onClick={decreasePage}
+                disabled={currentPage === 1}
+            >
                 {LEFT}
             </Arrow>
             {pages.map(page => (
@@ -28,7 +46,10 @@ const Pagination: FC<PaginationProps> = (props: PaginationProps) => {
                     {page}
                 </Page>
             ))}
-            <Arrow onClick={() => setPage(currentPage + 1)}>
+            <Arrow
+                onClick={increasePage}
+                disabled={!isIncrementAllowed}
+            >
                 {RIGHT}
             </Arrow>
         </PaginationWrapper>
