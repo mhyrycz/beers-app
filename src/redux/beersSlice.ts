@@ -1,12 +1,16 @@
+/* eslint-disable camelcase */
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { RootState } from "./store"
-
-// Define a type for the slice state
+export interface BookProps {
+    id: string;
+    name: string;
+    description: string;
+    image_url: string;
+}
 interface BeersState {
-    list: string[]
+    list: BookProps[][]
 }
 
-// Define the initial state using that type
 const initialState: BeersState = {
     list: []
 }
@@ -15,8 +19,8 @@ export const beersSlice = createSlice({
     name: "beers",
     initialState,
     reducers: {
-        updateBeersList: (state, action: PayloadAction<string[]>) => ({
-            list: state.list.concat(action.payload)
+        updateBeersList: (state, action: PayloadAction<BookProps[]>) => ({
+            list: [...state.list, action.payload]
         })
     }
 })

@@ -1,36 +1,23 @@
-import { useEffect, useState, FC } from "react"
-import { useAppSelector, useAppDispatch } from "../redux/hooks"
-import { selectBeers, updateBeersList } from "../redux/beersSlice"
+
+import { FC } from "react"
+import { useAppSelector } from "../redux/hooks"
+import { selectBeers } from "../redux/beersSlice"
+import useFetchBeers from "../fetch/useFetchBeers"
 
 const BeerList: FC = () => {
-    const [isLoaded, setIsLoaded] = useState(false)
-    const [error, setError] = useState(null)
-    const dispatch = useAppDispatch()
-
-    useEffect(() => {
-        fetch("https://api.punkapi.com/v2/beers")
-            .then(res => res.json())
-            .then(
-                (result: any) => {
-                    setIsLoaded(true)
-                    const beersNames = result.map((r: any) => r.name)
-                    dispatch(updateBeersList(beersNames))
-                },
-                (error) => {
-                    setIsLoaded(true)
-                    setError(error)
-                }
-            )
-    }, [dispatch])
+    const {
+        isLoaded,
+        page: { value: currentPage, set: setPage }
+    } = useFetchBeers()
 
     const beersList = useAppSelector(selectBeers)
 
     return (
-        <div className="App">
-            <header className="App-header">
-                {isLoaded ? JSON.stringify(beersList) : "...Loading"}
-                {error}
-            </header>
+        <div>
+            {isLoaded ? JSON.stringify(beersList.map(bl => bl.map(b => b.name))) : "...Loading"}
+            <button type="button" onClick={() => setPage(currentPage + 1)}>
+                nextPage
+            </button>
         </div>
     )
 }
