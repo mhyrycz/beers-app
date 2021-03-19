@@ -26,7 +26,7 @@ const useFetchBeers = (): UseFetchBeersProps => {
     const [page, setPage] = useState(1)
     const [search, setSearch] = useState<string | null>(null)
     const dispatch = useAppDispatch()
-    const isPageFetched = useAppSelector(isFetched(page - 1))
+    const isPageFetched = useAppSelector(isFetched(page))
 
     useEffect(() => {
         const timer = setTimeout(() => {

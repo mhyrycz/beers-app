@@ -40,10 +40,10 @@ export const selectBeersByPage = (id: number) => {
     )
 }
 
-export const isFetched = (id: number) => {
+export const isFetched = (page: number) => {
     return createSelector(
         selectBeers,
-        list => !!list[id]
+        list => !!list[page - 1]
     )
 }
 
