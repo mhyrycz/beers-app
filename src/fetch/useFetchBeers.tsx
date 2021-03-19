@@ -38,6 +38,7 @@ const useFetchBeers = (): UseFetchBeersProps => {
 
     useEffect(() => {
         if (!isPageFetched) {
+            setIsLoaded(false)
             fetch(`https://api.punkapi.com/v2/beers?${search ? `beer_name=${search}&` : ""}page=${page}&per_page=3`)
                 .then(res => {
                     if (!res.ok) {
