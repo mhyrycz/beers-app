@@ -16,7 +16,7 @@ interface UseFetchBeersProps {
 
 const useFetchBeers = (): UseFetchBeersProps => {
     const [isLoaded, setIsLoaded] = useState(false)
-    const [error, setError] = useState(null)
+    const [error, setError] = useState<string | null>(null)
     const [page, setPage] = useState(1)
     const dispatch = useAppDispatch()
     const isPageFetched = useAppSelector(isFetched(page - 1))
@@ -24,7 +24,12 @@ const useFetchBeers = (): UseFetchBeersProps => {
     useEffect(() => {
         if (!isPageFetched) {
             fetch(`https://api.punkapi.com/v2/beers?page=${page}&per_page=3`)
-                .then(res => res.json())
+                .then(res => {
+                    if (!res.ok) {
+                        throw Error("There was a problem to fetch data")
+                    }
+                    return res.json()
+                })
                 .then(
                     (result: BookProps[]) => {
                         setIsLoaded(true)
@@ -37,12 +42,8 @@ const useFetchBeers = (): UseFetchBeersProps => {
                             }
                         ))
                         dispatch(updateBeersList(beersNames))
-                    },
-                    (error) => {
-                        setIsLoaded(true)
-                        setError(error)
                     }
-                )
+                ).catch(err => setError(err.message))
         }
     }, [dispatch, page, isPageFetched])
 

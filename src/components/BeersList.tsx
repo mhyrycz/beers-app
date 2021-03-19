@@ -7,14 +7,22 @@ import useFetchBeers from "../fetch/useFetchBeers"
 const BeerList: FC = () => {
     const {
         isLoaded,
-        page: { value: currentPage, set: setPage }
+        page: { value: currentPage, set: setPage },
+        error
     } = useFetchBeers()
+
+    const displayList = () => {
+        if (error) {
+            return error
+        }
+        return isLoaded ? JSON.stringify(beersList.map(b => b.name)) : "...Loading"
+    }
 
     const beersList = useAppSelector(selectBeersByPage(currentPage - 1))
 
     return (
         <div>
-            {isLoaded ? JSON.stringify(beersList.map(b => b.name)) : "...Loading"}
+            {displayList()}
             <button
                 type="button"
                 onClick={() => setPage(currentPage - 1)}
