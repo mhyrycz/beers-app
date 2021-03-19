@@ -3,6 +3,7 @@ import { FC } from "react"
 import { useAppSelector } from "../redux/hooks"
 import { selectBeersByPage } from "../redux/beersSlice"
 import useFetchBeers from "../fetch/useFetchBeers"
+import Pagination from "./Pagination"
 
 const BeerList: FC = () => {
     const {
@@ -43,19 +44,10 @@ const BeerList: FC = () => {
         <div>
             <SearchInput />
             {displayList()}
-            <button
-                type="button"
-                onClick={() => page.set(page.value - 1)}
-                disabled={page.value === 1}
-            >
-                previous
-            </button>
-            <button
-                type="button"
-                onClick={() => page.set(page.value + 1)}
-            >
-                nextPage
-            </button>
+            <Pagination
+                currentPage={page.value}
+                setPage={page.set}
+            />
         </div>
     )
 }

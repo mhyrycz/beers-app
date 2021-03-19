@@ -3,7 +3,7 @@ import { useEffect, useState, Dispatch, SetStateAction } from "react"
 import { useAppDispatch, useAppSelector } from "../redux/hooks"
 import { updateBeersList, BookProps, isFetched, eraseBeersList } from "../redux/beersSlice"
 
-interface PageProps {
+export interface PageProps {
     value: number;
     set: Dispatch<SetStateAction<number>>,
 }
