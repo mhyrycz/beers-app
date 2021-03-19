@@ -29,11 +29,13 @@ const useFetchBeers = (): UseFetchBeersProps => {
     const isPageFetched = useAppSelector(isFetched(page))
 
     useEffect(() => {
-        const timer = setTimeout(() => {
-            setPage(1)
-            dispatch(eraseBeersList())
-        }, 1000)
-        return () => clearTimeout(timer)
+        if (search) {
+            const timer = setTimeout(() => {
+                setPage(1)
+                dispatch(eraseBeersList())
+            }, 1000)
+            return () => clearTimeout(timer)
+        }
     }, [search, dispatch])
 
     useEffect(() => {
