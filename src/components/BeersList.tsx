@@ -7,8 +7,9 @@ import useFetchBeers from "../fetch/useFetchBeers"
 const BeerList: FC = () => {
     const {
         isLoaded,
-        page: { value: currentPage, set: setPage },
-        error
+        page,
+        error,
+        search
     } = useFetchBeers()
 
     const displayList = () => {
@@ -18,21 +19,40 @@ const BeerList: FC = () => {
         return isLoaded ? JSON.stringify(beersList.map(b => b.name)) : "...Loading"
     }
 
-    const beersList = useAppSelector(selectBeersByPage(currentPage - 1))
+    const updateSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+        e.preventDefault()
+        search.set(e.target.value)
+    }
+
+    const beersList = useAppSelector(selectBeersByPage(page.value - 1))
+
+    const SearchInput = () => (
+        <label>
+            Search:
+            <input
+                type="text"
+                placeholder="Gimme the BEER!"
+                onChange={updateSearch}
+                value={search.value ?? ""}
+                autoFocus
+            />
+        </label>
+    )
 
     return (
         <div>
+            <SearchInput />
             {displayList()}
             <button
                 type="button"
-                onClick={() => setPage(currentPage - 1)}
-                disabled={currentPage === 1}
+                onClick={() => page.set(page.value - 1)}
+                disabled={page.value === 1}
             >
                 previous
             </button>
             <button
                 type="button"
-                onClick={() => setPage(currentPage + 1)}
+                onClick={() => page.set(page.value + 1)}
             >
                 nextPage
             </button>

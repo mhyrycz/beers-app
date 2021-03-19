@@ -1,29 +1,44 @@
 /* eslint-disable camelcase */
 import { useEffect, useState, Dispatch, SetStateAction } from "react"
 import { useAppDispatch, useAppSelector } from "../redux/hooks"
-import { updateBeersList, BookProps, isFetched } from "../redux/beersSlice"
+import { updateBeersList, BookProps, isFetched, eraseBeersList } from "../redux/beersSlice"
 
 interface PageProps {
     value: number;
     set: Dispatch<SetStateAction<number>>,
 }
 
+interface SearchProps {
+    value: string | null;
+    set: Dispatch<SetStateAction<string | null>>;
+}
+
 interface UseFetchBeersProps {
     isLoaded: boolean;
-    page: PageProps,
-    error: string | null
+    page: PageProps;
+    error: string | null;
+    search: SearchProps
 }
 
 const useFetchBeers = (): UseFetchBeersProps => {
     const [isLoaded, setIsLoaded] = useState(false)
     const [error, setError] = useState<string | null>(null)
     const [page, setPage] = useState(1)
+    const [search, setSearch] = useState<string | null>(null)
     const dispatch = useAppDispatch()
     const isPageFetched = useAppSelector(isFetched(page - 1))
 
     useEffect(() => {
+        const timer = setTimeout(() => {
+            setPage(1)
+            dispatch(eraseBeersList())
+        }, 1000)
+        return () => clearTimeout(timer)
+    }, [search, dispatch])
+
+    useEffect(() => {
         if (!isPageFetched) {
-            fetch(`https://api.punkapi.com/v2/beers?page=${page}&per_page=3`)
+            fetch(`https://api.punkapi.com/v2/beers?${search ? `beer_name=${search}&` : ""}page=${page}&per_page=3`)
                 .then(res => {
                     if (!res.ok) {
                         throw Error("There was a problem to fetch data")
@@ -45,7 +60,7 @@ const useFetchBeers = (): UseFetchBeersProps => {
                     }
                 ).catch(err => setError(err.message))
         }
-    }, [dispatch, page, isPageFetched])
+    }, [search, dispatch, page, isPageFetched])
 
     return {
         isLoaded,
@@ -53,7 +68,11 @@ const useFetchBeers = (): UseFetchBeersProps => {
             value: page,
             set: setPage
         },
-        error
+        error,
+        search: {
+            value: search,
+            set: setSearch
+        }
     }
 }
 

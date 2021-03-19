@@ -22,11 +22,14 @@ export const beersSlice = createSlice({
     reducers: {
         updateBeersList: (state, action: PayloadAction<BookProps[]>) => ({
             list: [...state.list, action.payload]
+        }),
+        eraseBeersList: () => ({
+            list: []
         })
     }
 })
 
-export const { updateBeersList } = beersSlice.actions
+export const { updateBeersList, eraseBeersList } = beersSlice.actions
 
 export const selectBeers = (state: RootState): BookProps[][] => state.beers.list
 
