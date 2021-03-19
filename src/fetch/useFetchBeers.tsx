@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import { useEffect, useState, Dispatch, SetStateAction } from "react"
-import { useAppDispatch } from "../redux/hooks"
-import { updateBeersList, BookProps } from "../redux/beersSlice"
+import { useAppDispatch, useAppSelector } from "../redux/hooks"
+import { updateBeersList, BookProps, isFetched } from "../redux/beersSlice"
 
 interface PageProps {
     value: number;
@@ -19,29 +19,32 @@ const useFetchBeers = (): UseFetchBeersProps => {
     const [error, setError] = useState(null)
     const [page, setPage] = useState(1)
     const dispatch = useAppDispatch()
+    const isPageFetched = useAppSelector(isFetched(page - 1))
 
     useEffect(() => {
-        fetch(`https://api.punkapi.com/v2/beers?page=${page}&per_page=3`)
-            .then(res => res.json())
-            .then(
-                (result: BookProps[]) => {
-                    setIsLoaded(true)
-                    const beersNames: BookProps[] = result.map((r: BookProps) => (
-                        {
-                            id: r.id,
-                            name: r.name,
-                            description: r.description,
-                            image_url: r.image_url
-                        }
-                    ))
-                    dispatch(updateBeersList(beersNames))
-                },
-                (error) => {
-                    setIsLoaded(true)
-                    setError(error)
-                }
-            )
-    }, [dispatch, page])
+        if (!isPageFetched) {
+            fetch(`https://api.punkapi.com/v2/beers?page=${page}&per_page=3`)
+                .then(res => res.json())
+                .then(
+                    (result: BookProps[]) => {
+                        setIsLoaded(true)
+                        const beersNames: BookProps[] = result.map((r: BookProps) => (
+                            {
+                                id: r.id,
+                                name: r.name,
+                                description: r.description,
+                                image_url: r.image_url
+                            }
+                        ))
+                        dispatch(updateBeersList(beersNames))
+                    },
+                    (error) => {
+                        setIsLoaded(true)
+                        setError(error)
+                    }
+                )
+        }
+    }, [dispatch, page, isPageFetched])
 
     return {
         isLoaded,
