@@ -21,7 +21,7 @@ const BeerList: FC = () => {
         }
         return isLoaded
             ? <BeersList>
-                {beersList.map(beer => <BeerElement key={beer.id} {...beer} />)}
+                {beersList.length ? beersList.map(beer => <BeerElement key={beer.id} {...beer} />) : "NotFound"}
             </BeersList>
             : "...Loading"
     }

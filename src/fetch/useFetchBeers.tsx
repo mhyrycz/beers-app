@@ -29,7 +29,7 @@ const useFetchBeers = (): UseFetchBeersProps => {
     const isPageFetched = useAppSelector(isFetched(page))
 
     useEffect(() => {
-        if (search) {
+        if (typeof search === "string") {
             const timer = setTimeout(() => {
                 setPage(1)
                 dispatch(eraseBeersList())
