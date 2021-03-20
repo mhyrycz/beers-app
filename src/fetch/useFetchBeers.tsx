@@ -21,7 +21,7 @@ interface UseFetchBeersProps {
 }
 
 const useFetchBeers = (): UseFetchBeersProps => {
-    const [isLoaded, setIsLoaded] = useState(false)
+    const [isLoaded, setIsLoaded] = useState(true)
     const [error, setError] = useState<string | null>(null)
     const [page, setPage] = useState(1)
     const [search, setSearch] = useState<string | null>(null)

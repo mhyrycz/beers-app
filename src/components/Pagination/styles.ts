@@ -39,4 +39,9 @@ export const PaginationWrapper = styled.div`
     ${shared}
     text-align: center;
     height: 50px;
+    position: fixed;
+    bottom: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 `
