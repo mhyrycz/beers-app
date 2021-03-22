@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.js": "/beers-app/static/js/main.c53cc4db.chunk.js",
-    "main.js.map": "/beers-app/static/js/main.c53cc4db.chunk.js.map",
-    "runtime-main.js": "/beers-app/static/js/runtime-main.13d6446b.js",
-    "runtime-main.js.map": "/beers-app/static/js/runtime-main.13d6446b.js.map",
-    "static/js/2.ba59939a.chunk.js": "/beers-app/static/js/2.ba59939a.chunk.js",
-    "static/js/2.ba59939a.chunk.js.map": "/beers-app/static/js/2.ba59939a.chunk.js.map",
-    "index.html": "/beers-app/index.html",
-    "static/js/2.ba59939a.chunk.js.LICENSE.txt": "/beers-app/static/js/2.ba59939a.chunk.js.LICENSE.txt"
+    "main.js": "http://mhyrycz.github.io/beers-app/static/js/main.c3c8b233.chunk.js",
+    "main.js.map": "http://mhyrycz.github.io/beers-app/static/js/main.c3c8b233.chunk.js.map",
+    "runtime-main.js": "http://mhyrycz.github.io/beers-app/static/js/runtime-main.fb81d2fc.js",
+    "runtime-main.js.map": "http://mhyrycz.github.io/beers-app/static/js/runtime-main.fb81d2fc.js.map",
+    "static/js/2.ef8c1776.chunk.js": "http://mhyrycz.github.io/beers-app/static/js/2.ef8c1776.chunk.js",
+    "static/js/2.ef8c1776.chunk.js.map": "http://mhyrycz.github.io/beers-app/static/js/2.ef8c1776.chunk.js.map",
+    "index.html": "http://mhyrycz.github.io/beers-app/index.html",
+    "static/js/2.ef8c1776.chunk.js.LICENSE.txt": "http://mhyrycz.github.io/beers-app/static/js/2.ef8c1776.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.13d6446b.js",
-    "static/js/2.ba59939a.chunk.js",
-    "static/js/main.c53cc4db.chunk.js"
+    "static/js/runtime-main.fb81d2fc.js",
+    "static/js/2.ef8c1776.chunk.js",
+    "static/js/main.c3c8b233.chunk.js"
   ]
 }
