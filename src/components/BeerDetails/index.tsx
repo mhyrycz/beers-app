@@ -1,6 +1,7 @@
 import { FC } from "react"
-import { useHistory, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import useFetchBeers, { BeerDetailsProps } from "../../fetch/useFetchBeerDetails"
+import BackButton from "../Button"
 import {
     Wrapper,
     ImgWrapper,
@@ -13,7 +14,6 @@ import {
 } from "./styles"
 
 const BeerDetails: FC = () => {
-    const goToList = useHistory().push
     const { id }: { id: string } = useParams()
     const {
         isLoaded,
@@ -22,7 +22,6 @@ const BeerDetails: FC = () => {
     } = useFetchBeers(Number(id))
 
     const Features = (beer: BeerDetailsProps) => {
-        console.log(beer)
         return Object.keys(beer).slice(2, 5).map((key) => (
             <Feature key={key}>
                 <Key>
@@ -59,13 +58,11 @@ const BeerDetails: FC = () => {
 
     return (
         <div>
+            <BackButton
+                label="Back to List"
+                destination="/"
+            />
             {displayBeer()}
-            <button
-                type={"button"}
-                onClick={() => goToList("/")}
-            >
-                back
-            </button>
         </div>
     )
 }
