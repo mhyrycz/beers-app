@@ -3,10 +3,11 @@ import styled from "styled-components"
 export const Wrapper = styled.div`
     width: 80%;
     margin: auto;
+    margin-top: 30px;
 `
 
 export const BeersList = styled.div`
-    margin-top: 50px;
+    margin-top: 30px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -18,5 +19,4 @@ export const Header = styled.div`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-top: 40px;
 `

@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components"
 
-const border = "solid 2px"
+const border = "solid 1px"
 
 const shared = () => css`
     display: flex;
@@ -40,7 +40,6 @@ export const PaginationWrapper = styled.div`
     ${shared}
     text-align: center;
     height: 50px;
-    position: fixed;
     bottom: 30px;
     width: 100%;
     display: flex;

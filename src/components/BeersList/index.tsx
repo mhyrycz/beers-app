@@ -37,19 +37,17 @@ const BeerList: FC = () => {
     const beersList = useAppSelector(selectBeersByPage(page - 1))
 
     return (
-        <>
-            <Wrapper>
-                <Header>
-                    <Search />
-                    <RandomBeerButton
-                        label="Random"
-                        destination={getRandomBeerAdress()}
-                    />
-                </Header>
-                {displayList()}
-            </Wrapper>
+        <Wrapper>
+            <Header>
+                <Search />
+                <RandomBeerButton
+                    label="Random"
+                    destination={getRandomBeerAdress()}
+                />
+            </Header>
+            {displayList()}
             <Pagination />
-        </>
+        </Wrapper>
     )
 }
 

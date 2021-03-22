@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 export const Input = styled.input`
-    font-size: 40px;
+    font-size: 30px;
     border: solid 1px;
     border-radius: 16px;
     &:focus {

@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
     justify-content: flex-start;
     border: solid 1px;
     border-radius: 30px;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
 `
 
 export const ImgWrapper = styled.div`

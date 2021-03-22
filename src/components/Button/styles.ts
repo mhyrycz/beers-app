@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 export const BeerButton = styled.button`
-    height: 74px;
+    height: 60px;
     width: 200px;
     border-radius: 16px;
     border: solid 1px;
