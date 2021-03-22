@@ -1,15 +1,15 @@
 import { FC } from "react"
-import { BrowserRouter, Route, Switch } from "react-router-dom"
+import { HashRouter as Router, Route, Switch } from "react-router-dom"
 import BeersList from "../components/BeersList"
 import BeerDetails from "../components/BeerDetails"
 
 const AppRouter: FC = () => (
-    <BrowserRouter>
+    <Router>
         <Switch>
             <Route path="/" component={BeersList} exact={true} />
             <Route path="/:id" component={BeerDetails} exact={true} />
         </Switch>
-    </BrowserRouter>
+    </Router>
 )
 
 export default AppRouter
