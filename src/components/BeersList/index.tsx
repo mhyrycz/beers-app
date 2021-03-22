@@ -1,8 +1,8 @@
 
 import { FC } from "react"
-import { useAppSelector } from "../../redux/hooks"
+import { useAppSelector, useAppDispatch } from "../../redux/hooks"
 import { selectBeersByPage } from "../../redux/beersSlice"
-import { getPage } from "../../redux/fetchSlice"
+import { getPage, getSearch, updateSearch } from "../../redux/fetchSlice"
 import useFetchBeers from "../../fetch/useFetchBeers"
 import { BeersList } from "./styles"
 import Pagination from "../Pagination"
@@ -11,11 +11,13 @@ import BeerElement from "./BeerElement"
 const BeerList: FC = () => {
     const {
         isLoaded,
-        error,
-        search
+        error
     } = useFetchBeers()
 
+    const dispatch = useAppDispatch()
+
     const page = useAppSelector(getPage)
+    const search = useAppSelector(getSearch)
 
     const displayList = () => {
         if (error) {
@@ -28,9 +30,9 @@ const BeerList: FC = () => {
             : "...Loading"
     }
 
-    const updateSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const setSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault()
-        search.set(e.target.value)
+        dispatch(updateSearch(e.target.value))
     }
 
     const beersList = useAppSelector(selectBeersByPage(page - 1))
@@ -41,8 +43,8 @@ const BeerList: FC = () => {
             <input
                 type="text"
                 placeholder="Gimme the BEER!"
-                onChange={updateSearch}
-                value={search.value ?? ""}
+                onChange={setSearch}
+                value={search ?? ""}
                 autoFocus
             />
         </label>

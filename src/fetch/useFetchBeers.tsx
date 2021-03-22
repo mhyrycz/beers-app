@@ -1,34 +1,31 @@
 /* eslint-disable camelcase */
-import { useEffect, useState, Dispatch, SetStateAction } from "react"
+import { useEffect, useState, useRef } from "react"
 import { useAppDispatch, useAppSelector } from "../redux/hooks"
 import { updateBeersList, BookProps, isFetched, eraseBeersList } from "../redux/beersSlice"
-import { getPage, resetPage } from "../redux/fetchSlice"
-interface SearchProps {
-    value: string | null;
-    set: Dispatch<SetStateAction<string | null>>;
-}
-
+import { getPage, resetPage, getSearch } from "../redux/fetchSlice"
 interface UseFetchBeersProps {
     isLoaded: boolean;
     error: string | null;
-    search: SearchProps
 }
 
 const useFetchBeers = (): UseFetchBeersProps => {
     const [isLoaded, setIsLoaded] = useState(true)
     const [error, setError] = useState<string | null>(null)
-    const [search, setSearch] = useState<string | null>(null)
     const dispatch = useAppDispatch()
     const page = useAppSelector(getPage)
+    const search = useAppSelector(getSearch)
     const isPageFetched = useAppSelector(isFetched(page))
+    const didMount = useRef(false)
 
     useEffect(() => {
-        if (typeof search === "string") {
+        if (didMount.current && typeof search === "string") {
             const timer = setTimeout(() => {
                 dispatch(resetPage())
                 dispatch(eraseBeersList())
             }, 1000)
             return () => clearTimeout(timer)
+        } else {
+            didMount.current = true
         }
     }, [search, dispatch])
 
@@ -61,11 +58,7 @@ const useFetchBeers = (): UseFetchBeersProps => {
 
     return {
         isLoaded,
-        error,
-        search: {
-            value: search,
-            set: setSearch
-        }
+        error
     }
 }
 
