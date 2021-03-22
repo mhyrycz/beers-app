@@ -4,7 +4,7 @@ import { useAppSelector } from "../../redux/hooks"
 import { selectBeersByPage } from "../../redux/beersSlice"
 import { getPage } from "../../redux/fetchSlice"
 import useFetchBeers from "../../fetch/useFetchBeers"
-import { BeersList, Header, Wrapper } from "./styles"
+import { BeersList, Header, Wrapper, Message } from "./styles"
 import Pagination from "../Pagination"
 import BeerElement from "./BeerElement"
 import Search from "../BeerSearch"
@@ -20,13 +20,13 @@ const BeerList: FC = () => {
 
     const displayList = () => {
         if (error) {
-            return error
+            return <Message>{error}</Message>
         }
         return isLoaded
-            ? <BeersList>
-                {beersList.length ? beersList.map(beer => <BeerElement key={beer.id} {...beer} />) : "NotFound"}
-            </BeersList>
-            : "...Loading"
+            ? beersList.length
+                ? beersList.map(beer => <BeerElement key={beer.id} {...beer} />)
+                : <Message>Not Found</Message>
+            : <Message>...Loading</Message>
     }
 
     const getRandomBeerAdress = () => {
@@ -45,7 +45,9 @@ const BeerList: FC = () => {
                     destination={getRandomBeerAdress()}
                 />
             </Header>
-            {displayList()}
+            <BeersList>
+                {displayList()}
+            </BeersList>
             <Pagination />
         </Wrapper>
     )

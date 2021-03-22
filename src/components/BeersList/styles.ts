@@ -20,3 +20,11 @@ export const Header = styled.div`
     justify-content: space-between;
     align-items: center;
 `
+
+export const Message = styled.div`
+    height: 696px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+`

@@ -2,6 +2,7 @@ import { FC } from "react"
 import { useParams } from "react-router-dom"
 import useFetchBeers, { BeerDetailsProps } from "../../fetch/useFetchBeerDetails"
 import BackButton from "../Button"
+import { Message } from "../BeersList/styles"
 import {
     Wrapper,
     ImgWrapper,
@@ -49,11 +50,11 @@ const BeerDetails: FC = () => {
 
     const displayBeer = () => {
         if (error) {
-            return error
+            return <Message>{error}</Message>
         }
         return isLoaded
             ? Beer
-            : "...Loading"
+            : <Message>...Loading</Message>
     }
 
     return (
