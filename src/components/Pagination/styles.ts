@@ -19,6 +19,7 @@ export const Page = styled.div<{ active?: boolean }>`
     :nth-last-of-type(n+3){
         border-right: ${border};
     }
+    font-size: 30px;
 `
 export const Arrow = styled.div<{ disabled?: boolean }>`
     ${shared}
