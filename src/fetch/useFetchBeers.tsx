@@ -2,12 +2,7 @@
 import { useEffect, useState, Dispatch, SetStateAction } from "react"
 import { useAppDispatch, useAppSelector } from "../redux/hooks"
 import { updateBeersList, BookProps, isFetched, eraseBeersList } from "../redux/beersSlice"
-
-export interface PageProps {
-    value: number;
-    set: Dispatch<SetStateAction<number>>,
-}
-
+import { getPage, resetPage } from "../redux/fetchSlice"
 interface SearchProps {
     value: string | null;
     set: Dispatch<SetStateAction<string | null>>;
@@ -15,7 +10,6 @@ interface SearchProps {
 
 interface UseFetchBeersProps {
     isLoaded: boolean;
-    page: PageProps;
     error: string | null;
     search: SearchProps
 }
@@ -23,15 +17,15 @@ interface UseFetchBeersProps {
 const useFetchBeers = (): UseFetchBeersProps => {
     const [isLoaded, setIsLoaded] = useState(true)
     const [error, setError] = useState<string | null>(null)
-    const [page, setPage] = useState(1)
     const [search, setSearch] = useState<string | null>(null)
     const dispatch = useAppDispatch()
+    const page = useAppSelector(getPage)
     const isPageFetched = useAppSelector(isFetched(page))
 
     useEffect(() => {
         if (typeof search === "string") {
             const timer = setTimeout(() => {
-                setPage(1)
+                dispatch(resetPage())
                 dispatch(eraseBeersList())
             }, 1000)
             return () => clearTimeout(timer)
@@ -67,10 +61,6 @@ const useFetchBeers = (): UseFetchBeersProps => {
 
     return {
         isLoaded,
-        page: {
-            value: page,
-            set: setPage
-        },
         error,
         search: {
             value: search,

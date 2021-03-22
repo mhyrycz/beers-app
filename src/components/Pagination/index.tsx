@@ -1,40 +1,35 @@
 import { FC } from "react"
 import { PaginationWrapper, Page, Arrow } from "./styles"
-import { PageProps } from "../../fetch/useFetchBeers"
 import { selectBeersByPage } from "../../redux/beersSlice"
-import { useAppSelector } from "../../redux/hooks"
+import { incrementPage, decrementPage, getPage } from "../../redux/fetchSlice"
+import { useAppSelector, useAppDispatch } from "../../redux/hooks"
 
 const RIGHT = String.fromCharCode(8680)
 const LEFT = String.fromCharCode(8678)
 
-interface PaginationProps {
-    currentPage: number;
-    setPage: PageProps["set"];
-}
-
-const Pagination: FC<PaginationProps> = (props: PaginationProps) => {
-    const { currentPage, setPage } = props
+const Pagination: FC = () => {
+    const currentPage = useAppSelector(getPage)
+    const dispatch = useAppDispatch()
     const slide = currentPage > 10 ? currentPage - 10 : 0
     const pages = Array.from({ length: 10 }, (_, i) => i + 1 + slide)
-    console.log(useAppSelector(selectBeersByPage(currentPage - 1)).length)
     const isIncrementAllowed = useAppSelector(selectBeersByPage(currentPage - 1)).length === 3
 
-    const decreasePage = () => {
+    const goPreviousPage = () => {
         if (currentPage > 1) {
-            setPage(currentPage - 1)
+            dispatch(decrementPage())
         }
     }
 
-    const increasePage = () => {
+    const goNextPage = () => {
         if (isIncrementAllowed) {
-            setPage(currentPage + 1)
+            dispatch(incrementPage())
         }
     }
 
     return (
         <PaginationWrapper>
             <Arrow
-                onClick={decreasePage}
+                onClick={goPreviousPage}
                 disabled={currentPage === 1}
             >
                 {LEFT}
@@ -48,7 +43,7 @@ const Pagination: FC<PaginationProps> = (props: PaginationProps) => {
                 </Page>
             ))}
             <Arrow
-                onClick={increasePage}
+                onClick={goNextPage}
                 disabled={!isIncrementAllowed}
             >
                 {RIGHT}

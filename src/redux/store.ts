@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit"
 import beers from "./beersSlice"
+import fetch from "./fetchSlice"
 
 export const store = configureStore({
     reducer: {
-        beers
+        beers,
+        fetch
     }
 })
 

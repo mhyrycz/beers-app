@@ -2,6 +2,7 @@
 import { FC } from "react"
 import { useAppSelector } from "../../redux/hooks"
 import { selectBeersByPage } from "../../redux/beersSlice"
+import { getPage } from "../../redux/fetchSlice"
 import useFetchBeers from "../../fetch/useFetchBeers"
 import { BeersList } from "./styles"
 import Pagination from "../Pagination"
@@ -10,10 +11,11 @@ import BeerElement from "./BeerElement"
 const BeerList: FC = () => {
     const {
         isLoaded,
-        page,
         error,
         search
     } = useFetchBeers()
+
+    const page = useAppSelector(getPage)
 
     const displayList = () => {
         if (error) {
@@ -31,7 +33,7 @@ const BeerList: FC = () => {
         search.set(e.target.value)
     }
 
-    const beersList = useAppSelector(selectBeersByPage(page.value - 1))
+    const beersList = useAppSelector(selectBeersByPage(page - 1))
 
     const SearchInput = () => (
         <label>
@@ -50,10 +52,7 @@ const BeerList: FC = () => {
         <div>
             <SearchInput />
             {displayList()}
-            <Pagination
-                currentPage={page.value}
-                setPage={page.set}
-            />
+            <Pagination />
         </div>
     )
 }
