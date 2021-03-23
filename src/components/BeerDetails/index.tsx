@@ -12,7 +12,8 @@ import {
     Description,
     Feature,
     Key,
-    Value
+    Value,
+    ButtonWrapper
 } from "./styles"
 
 const BeerDetails: FC = () => {
@@ -59,13 +60,15 @@ const BeerDetails: FC = () => {
     }
 
     return (
-        <div>
-            <BackButton
-                label="Back to List"
-                destination="/"
-            />
+        <>
+            <ButtonWrapper>
+                <BackButton
+                    label="Back to List"
+                    destination="/"
+                />
+            </ButtonWrapper>
             {displayBeer()}
-        </div>
+        </>
     )
 }
 

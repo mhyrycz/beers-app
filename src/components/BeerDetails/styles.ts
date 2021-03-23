@@ -48,3 +48,6 @@ export const Key = styled.div`
 export const Value = styled.div`
     padding-left: 10px;
 `
+export const ButtonWrapper = styled.div`
+    margin: 30px;
+`
