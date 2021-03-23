@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.js": "/beers-app/static/js/main.b9c5f12b.chunk.js",
-    "main.js.map": "/beers-app/static/js/main.b9c5f12b.chunk.js.map",
+    "main.js": "/beers-app/static/js/main.53dfd3fa.chunk.js",
+    "main.js.map": "/beers-app/static/js/main.53dfd3fa.chunk.js.map",
     "runtime-main.js": "/beers-app/static/js/runtime-main.13d6446b.js",
     "runtime-main.js.map": "/beers-app/static/js/runtime-main.13d6446b.js.map",
-    "static/js/2.8c0b9983.chunk.js": "/beers-app/static/js/2.8c0b9983.chunk.js",
-    "static/js/2.8c0b9983.chunk.js.map": "/beers-app/static/js/2.8c0b9983.chunk.js.map",
+    "static/js/2.f0e73ed2.chunk.js": "/beers-app/static/js/2.f0e73ed2.chunk.js",
+    "static/js/2.f0e73ed2.chunk.js.map": "/beers-app/static/js/2.f0e73ed2.chunk.js.map",
     "index.html": "/beers-app/index.html",
-    "static/js/2.8c0b9983.chunk.js.LICENSE.txt": "/beers-app/static/js/2.8c0b9983.chunk.js.LICENSE.txt"
+    "static/js/2.f0e73ed2.chunk.js.LICENSE.txt": "/beers-app/static/js/2.f0e73ed2.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.13d6446b.js",
-    "static/js/2.8c0b9983.chunk.js",
-    "static/js/main.b9c5f12b.chunk.js"
+    "static/js/2.f0e73ed2.chunk.js",
+    "static/js/main.53dfd3fa.chunk.js"
   ]
 }
