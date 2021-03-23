@@ -2,12 +2,6 @@
 /* eslint-disable camelcase */
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { RootState } from "./store"
-export interface BookProps {
-    id: string;
-    name: string;
-    description: string;
-    image_url: string;
-}
 interface FetchState {
     search: string | null,
     page: number,
